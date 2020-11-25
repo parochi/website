@@ -1,0 +1,52 @@
+---
+layout: default
+---
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'en-US' }}">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>{{ page.title }} - {{ site.title }}</title>
+  {% seo %}
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body style="padding-bottom:20px;"> 
+ {% include navbar.html %}
+<div class="container">
+  &nbsp;
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-10"> 
+        {{ content }}
+      </div>
+      <div class="col-2"> 
+        <div class="row h-100 mt-5">
+          <!-- TODO For now it is blocked, but we should work on it
+          <aside class="col-md-2">
+            <div class="mt-5 mb-3" id="sidemenu">
+                <ul class="nav flex-md-column flex-row justify-content-between">
+                    <li class="nav-item"><a href="#sec1" class="nav-link active pl-0">One</a></li>
+                    <li class="nav-item"><a href="#sec2" class="nav-link pl-0">Two</a></li>
+                    <li class="nav-item">
+                        <a href="#sec3" class="nav-link pl-0">Three</a>
+                        <ul class="nav flex-md-column ml-2 hidden-sm-down">
+                            <li class="nav-item"><a href="#sec3a" class="nav-link">Section A</a></li>
+                            <li class="nav-item"><a href="#sec3b" class="nav-link">Section B</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="#sec4" class="nav-link pl-0">Four</a></li>
+                    <li class="nav-item"><a href="#sec5" class="nav-link pl-0">Five</a></li>
+                    <li class="nav-item"><a href="#sec6" class="nav-link pl-0">Six</a></li>
+                </ul>
+            </div>
+          </aside>
+          -->
+        </div>
+      </div>
+  </div>
+</div>
+ {% include footer.html %}
+</body>
+</html>
