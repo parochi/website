@@ -1,7 +1,15 @@
 ---
 layout: post
 title: Use Makefile for your daily development tasks
+date: 2020-11-17
+related_image: /assets/images/2020-11-17.jpg
 ---
+<div class="view overlay">
+	<img class="card-img-top" src="{{ page.related_image }}" alt="Card image cap">
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
 
 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture. 
 
@@ -118,5 +126,4 @@ localbuild:
     docker tag &lt;your tag name&gt; &lt;your quay repo location&gt;:latest
     docker push &lt;your quay repo location&gt;:latest
 </pre></td></tr></table></div>
-
 

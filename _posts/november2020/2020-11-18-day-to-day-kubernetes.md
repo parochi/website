@@ -1,7 +1,15 @@
 ---
 layout: post
 title: Day to Day Kubernetes Commandline Reference
+date: 2020-11-18
+related_image: /assets/images/2020-11-18.jpg
 ---
+<div class="view overlay">
+	<img class="card-img-top" src="{{ page.related_image }}" alt="Card image cap">
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
 
 There are multiple resources for the Kubernetes `kubectl` command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.
 

@@ -1,0 +1,114 @@
+I"�
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-10">
+    <div class="card h-100">
+      <!--Card image-->
+      <div class="view overlay">
+        <!-- <img class="card-img-top" src="/assets/images/2020-11-19.jpg" alt="Card image cap">-->
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!--Card content-->
+      <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">Go Concurrency - A typical production use</h4>
+        <p class="card-title published-color">Published on Nov 19, 2020</p>
+        <!--Text-->
+        <p class="card-text"><div class="view overlay">
+	<img class="card-img-top" src="/assets/images/2020-11-19.jpg" alt="Card image cap" />
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
+
+<p>Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept</p>
+
+<p>“Do not communicate by sharing memory; instead, share memory by communicating”.</p>
+
+<p>These Go routines are unique and they are not operating system threads. It is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. More you can read at the official documentation site  <a href="https://golang.org/doc/effective_go.html#concurrency">here</a></p>
+</p>
+        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        <button type="button" class="btn btn-md"><a href="/2020/11/19/go-concurrency.html" class="card-link">Read More...</a></button>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+</div>
+<div>
+&nbsp;
+</div>
+
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-10">
+    <div class="card h-100">
+      <!--Card image-->
+      <div class="view overlay">
+        <!-- <img class="card-img-top" src="/assets/images/2020-11-18.jpg" alt="Card image cap">-->
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!--Card content-->
+      <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">Day to Day Kubernetes Commandline Reference</h4>
+        <p class="card-title published-color">Published on Nov 18, 2020</p>
+        <!--Text-->
+        <p class="card-text"><div class="view overlay">
+	<img class="card-img-top" src="/assets/images/2020-11-18.jpg" alt="Card image cap" />
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
+<div>
+&nbsp;
+</div>
+<p>There are multiple resources for the Kubernetes <code class="language-plaintext highlighter-rouge">kubectl</code> command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.</p>
+</p>
+        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        <button type="button" class="btn btn-md"><a href="/2020/11/18/day-to-day-kubernetes.html" class="card-link">Read More...</a></button>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+</div>
+<div>
+&nbsp;
+</div>
+
+<div class="row row-cols-1 row-cols-md-3">
+  <div class="col mb-10">
+    <div class="card h-100">
+      <!--Card image-->
+      <div class="view overlay">
+        <!-- <img class="card-img-top" src="/assets/images/2020-11-17.jpg" alt="Card image cap">-->
+        <a href="#!">
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      <!--Card content-->
+      <div class="card-body">
+        <!--Title-->
+        <h4 class="card-title">Use Makefile for your daily development tasks</h4>
+        <p class="card-title published-color">Published on Nov 17, 2020</p>
+        <!--Text-->
+        <p class="card-text"><div class="view overlay">
+	<img class="card-img-top" src="/assets/images/2020-11-17.jpg" alt="Card image cap" />
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
+<p>A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.</p>
+</p>
+        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+        <button type="button" class="btn btn-md"><a href="/2020/11/17/use-makefile-for-your-daily-development-tasks.html" class="card-link">Read More...</a></button>
+      </div>
+    </div>
+    <!-- Card -->
+  </div>
+</div>
+<div>
+&nbsp;
+</div>
+:ET

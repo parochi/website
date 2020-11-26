@@ -1,14 +1,23 @@
 ---
 layout: post
 title: Go Concurrency - A typical production use
+date: 2020-11-19
+related_image: /assets/images/2020-11-19.jpg
 ---
+
+<div class="view overlay">
+	<img class="card-img-top" src="{{ page.related_image }}" alt="Card image cap">
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
 
 Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept 
  
 "Do not communicate by sharing memory; instead, share memory by communicating".
  
 These Go routines are unique and they are not operating system threads. It is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. More you can read at the official documentation site  [here](https://golang.org/doc/effective_go.html#concurrency) 
- 
+
 Enough of the concepts, let us delve into the code and apply these concepts. First, we will implement some example code to understand the concepts, after that we will do an identical code that we typically use in production. A typical goroutine is written below.
 
 

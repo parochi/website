@@ -1,0 +1,6 @@
+1. To run in local
+    bundle exec jekyll serve
+2. To publish to production
+    JEKYLL_ENV=production bundle exec jekyll build
+3. To install gems
+    gem install bundler jekyll
