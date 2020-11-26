@@ -1,6 +1,0 @@
-I"�<p>Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept</p>
-
-<p>“Do not communicate by sharing memory; instead, share memory by communicating”.</p>
-
-<p>These Go routines are unique and they are not operating system threads. It is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space.</p>
-:ET
