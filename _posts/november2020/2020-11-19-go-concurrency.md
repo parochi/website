@@ -2,7 +2,7 @@
 layout: post
 title: Go Concurrency - A typical production use
 date: 2020-11-19
-related_image: /assets/images/2020-11-19.jpg
+related_image: /assets/images/2020-11-19.png
 ---
 
 <div class="view overlay">

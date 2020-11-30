@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-11-25T23:12:16-08:00</updated><id>/feed.xml</id><title type="html">Parochi</title><subtitle>All about learning new technologies, articles based on the previous or present experience.</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>/2020/11/19/go-concurrency</id><content type="html" xml:base="/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
-	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-28T15:17:23-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>All about learning new technologies, articles based on the previous or present experience.</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="http://localhost:4000/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/go-concurrency</id><content type="html" xml:base="http://localhost:4000/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
+	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
     &lt;/a&gt;
@@ -200,7 +200,67 @@ Yes, Channel is a great way of sending and receiving the values. A typical chann
 
 &lt;p&gt;For more information, it is always recommended to go through the Effective  &lt;a href=&quot;https://golang.org/doc/effective_go.html#concurrency&quot;&gt;Go concurrency&lt;/a&gt;  documentation.&lt;/p&gt;
 
-&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Kubernetes - ConfigMaps</title><link href="http://localhost:4000/2020/11/19/kubernetes-config.html" rel="alternate" type="text/html" title="Kubernetes - ConfigMaps" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/kubernetes-config</id><content type="html" xml:base="http://localhost:4000/2020/11/19/kubernetes-config.html">&lt;div class=&quot;view overlay&quot;&gt;
+	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-26.png&quot; alt=&quot;Card image cap&quot; /&gt;
+    &lt;a href=&quot;#!&quot;&gt;
+        &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;p&gt;ConfigMaps in kubernetes are a flexible way of storing the non confidential information in key value pairs, that are needed by the pods during runtime. If you are a Kubernetes Developer, you have already aware of the configmaps and how to use them in the pod definition yaml files. This article is about to share the information what If we configured the configmaps in a wrong way or what are runtime errors we may come across when accessing the configmap values.&lt;/p&gt;
+
+&lt;p&gt;Now, let us start with creating the configmap using the kubectl command [its called the imperative way of creating resources in kuberntes]&lt;/p&gt;
+
+&lt;p&gt;kubectl create configmap name-of-config –from-literal=keyname=value –from-literal=keyname=value …&lt;/p&gt;
+
+&lt;p&gt;kubectl create configmap name-of-config –from-file=file-path-here.properties&lt;/p&gt;
+
+&lt;p&gt;You can reference the confimap in one of the below ways depending on your requirement&lt;/p&gt;
+
+&lt;h1 id=&quot;reference-from-the-env&quot;&gt;Reference from the env&lt;/h1&gt;
+&lt;p&gt;envFrom:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;configMapRef:
+  name: app-config&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;reference-from-single-env&quot;&gt;Reference from Single env&lt;/h1&gt;
+&lt;p&gt;env:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;name: APP_COLOR
+valueFrom:
+  configMapKeyRef:
+    name: app-config
+    key: APP_COLOR&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;reference-from-a-volume&quot;&gt;Reference from a volume&lt;/h1&gt;
+&lt;p&gt;volumes:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;name: app-config-volume
+configMap:
+  name: app-config&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;When you create the configmap in an imperative way, if you make a mistake as below&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;kubectl create configmap webapp-config-mapp –from-literal APP_COLOR:darkblue&lt;/p&gt;
+
+&lt;p&gt;Then, it will throw an error “error: invalid literal source APP_COLOR:darkblue, expected key=value”&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Create a configmap without a name,&lt;/p&gt;
+
+    &lt;p&gt;kubectl create configmap –from-literal=APP_COLOR=green&lt;/p&gt;
+
+    &lt;p&gt;then it will throw the below error&lt;/p&gt;
+
+    &lt;p&gt;error: exactly one NAME is required, got 0&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-18.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -383,7 +443,7 @@ $ kubectl get pods --selector &amp;lt;label name&amp;gt;=&amp;lt;label value&amp
 $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;gt;
 &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
 
-&lt;p&gt;All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  &lt;a href=&quot;https://kubernetes.io/docs/home/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;p&gt;All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  &lt;a href=&quot;https://kubernetes.io/docs/home/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-17.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Y12FP2FMY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-5Y12FP2FMY');
+  </script>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Kubernetes - ConfigMaps - Parochi</title>
+  <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Kubernetes - ConfigMaps | Parochi</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Kubernetes - ConfigMaps" />
+<meta name="author" content="Rajesh" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="All about learning new technologies, articles based on the previous or present experience." />
+<meta property="og:description" content="All about learning new technologies, articles based on the previous or present experience." />
+<link rel="canonical" href="http://localhost:4000/2020/11/19/kubernetes-config.html" />
+<meta property="og:url" content="http://localhost:4000/2020/11/19/kubernetes-config.html" />
+<meta property="og:site_name" content="Parochi" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-19T00:00:00-08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Kubernetes - ConfigMaps" />
+<meta name="twitter:site" content="@rajesh_1432" />
+<meta name="twitter:creator" content="@Rajesh" />
+<script type="application/ld+json">
+{"description":"All about learning new technologies, articles based on the previous or present experience.","@type":"BlogPosting","url":"http://localhost:4000/2020/11/19/kubernetes-config.html","headline":"Kubernetes - ConfigMaps","dateModified":"2020-11-19T00:00:00-08:00","datePublished":"2020-11-19T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/11/19/kubernetes-config.html"},"author":{"@type":"Person","name":"Rajesh"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script data-ad-client="ca-pub-2306892121469167" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body style="padding-bottom:20px;"> 
+ <nav class="navbar navbar-expand-md navbar-dark bg-brand-nav py-4">
+  <div class="container">
+    <a class="navbar-brand font-brand-nav" href="/">parochi</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <!--Twitter-->
+              <a class="navbar-brand font-brand-menu" target="_blank" href="https://twitter.com/@rajesh_1432" type="button" role="button"><i class="fab fa-twitter"></i></a>
+            </li>
+            <li class="nav-item">
+              <!--LinkedIn-->
+              <a class="navbar-brand font-brand-menu" target="_blank" href="https://www.linkedin.com/in/reddyrajeshkumar/" type="button" role="button"><i class="fab fa-linkedin-in"></i></a>
+            </li>
+            <li class="nav-item">
+            <!--Github-->
+            <a class="navbar-brand font-brand-menu" target="_blank" href="https://github.com/parochi"  type="button" role="button"><i class="fab fa-github"></i></a>
+            </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+<!--
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a href="/" class="navbar-brand">parochi</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar6">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse collapse justify-content-stretch" id="navbar6">
+      <ul class="navbar-nav">
+          <li class="nav-item active">
+              <a class="nav-link" href="#">Link <span class="sr-only">Home</span></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="//codeply.com">Codeply</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+-->
+<!--
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Parochi</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      
+      <a class="nav-item nav-link" href="/about.html">About</a>
+        
+    </div>
+  </div>
+</nav>
+-->
+<div class="container">
+  &nbsp;
+  <!-- Ad Placement -->
+</div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-10 font-read-text"> 
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Kubernetes - ConfigMaps</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-11-19T00:00:00-08:00" itemprop="datePublished">Nov 19, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <div class="view overlay">
+	<img class="card-img-top" src="/assets/images/2020-11-26.png" alt="Card image cap" />
+    <a href="#!">
+        <div class="mask rgba-white-slight"></div>
+    </a>
+</div>
+
+<p>ConfigMaps in kubernetes are a flexible way of storing the non confidential information in key value pairs, that are needed by the pods during runtime. If you are a Kubernetes Developer, you have already aware of the configmaps and how to use them in the pod definition yaml files. This article is about to share the information what If we configured the configmaps in a wrong way or what are runtime errors we may come across when accessing the configmap values.</p>
+
+<p>Now, let us start with creating the configmap using the kubectl command [its called the imperative way of creating resources in kuberntes]</p>
+
+<p>kubectl create configmap name-of-config –from-literal=keyname=value –from-literal=keyname=value …</p>
+
+<p>kubectl create configmap name-of-config –from-file=file-path-here.properties</p>
+
+<p>You can reference the confimap in one of the below ways depending on your requirement</p>
+
+<h1 id="reference-from-the-env">Reference from the env</h1>
+<p>envFrom:</p>
+<ul>
+  <li>configMapRef:
+  name: app-config</li>
+</ul>
+
+<h1 id="reference-from-single-env">Reference from Single env</h1>
+<p>env:</p>
+<ul>
+  <li>name: APP_COLOR
+valueFrom:
+  configMapKeyRef:
+    name: app-config
+    key: APP_COLOR</li>
+</ul>
+
+<h1 id="reference-from-a-volume">Reference from a volume</h1>
+<p>volumes:</p>
+<ul>
+  <li>name: app-config-volume
+configMap:
+  name: app-config</li>
+</ul>
+
+<ol>
+  <li>When you create the configmap in an imperative way, if you make a mistake as below</li>
+</ol>
+
+<p>kubectl create configmap webapp-config-mapp –from-literal APP_COLOR:darkblue</p>
+
+<p>Then, it will throw an error “error: invalid literal source APP_COLOR:darkblue, expected key=value”</p>
+
+<ol>
+  <li>
+    <p>Create a configmap without a name,</p>
+
+    <p>kubectl create configmap –from-literal=APP_COLOR=green</p>
+
+    <p>then it will throw the below error</p>
+
+    <p>error: exactly one NAME is required, got 0</p>
+  </li>
+</ol>
+
+
+  </div><a class="u-url" href="/2020/11/19/kubernetes-config.html" hidden></a>
+</article>
+
+        <br/>
+      </div>
+      <div class="col-2"> 
+        <div class="row h-100 mt-5">
+        </div>
+      </div>
+  </div>
+</div>
+ 
+
+<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Site footer -->
+<footer class="site-footer text-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">A software engineer with tremndous experience in design and development of medium to large scale applications in various environments with major expertise in Cloud Native.</p>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <!--
+        <h6>Categories</h6>
+        <ul class="footer-links">
+          <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
+          <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
+          <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
+          <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
+          <li><a href="http://scanfcode.com/category/android/">Android</a></li>
+          <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+        </ul>
+        -->
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <!--
+        <h6>Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="http://scanfcode.com/about/">About Us</a></li>
+          <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+          <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
+          <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+        </ul>
+        -->
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by Parochi.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <!-- Social buttons -->
+  <ul class="list-unstyled list-inline text-center">
+    <li class="list-inline-item">
+      <a class="btn-floating btn-fb mx-1">
+        <i class="fab fa-facebook-f"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-tw mx-1">
+        <i class="fab fa-twitter"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-gplus mx-1">
+        <i class="fab fa-google-plus-g"> </i>
+      </a>
+    </li>
+    <li class="list-inline-item">
+      <a class="btn-floating btn-li mx-1">
+        <i class="fab fa-linkedin-in"> </i>
+      </a>
+    </li>
+    <!--
+    <li class="list-inline-item">
+      <a class="btn-floating btn-dribbble mx-1">
+        <i class="fab fa-dribbble"> </i>
+      </a>
+    </li>
+    -->
+  </ul>
+  <!-- Social buttons -->
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
