@@ -13,11 +13,11 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>Kubernetes - ConfigMaps - Parochi</title>
+  <title>Kubernetes - ConfigMaps & Secrets - Parochi</title>
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Kubernetes - ConfigMaps | Parochi</title>
+<title>Kubernetes - ConfigMaps &amp; Secrets | Parochi</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Kubernetes - ConfigMaps" />
+<meta property="og:title" content="Kubernetes - ConfigMaps &amp; Secrets" />
 <meta name="author" content="Rajesh" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="All about learning new technologies, articles based on the previous or present experience." />
@@ -28,11 +28,11 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-19T00:00:00-08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Kubernetes - ConfigMaps" />
+<meta property="twitter:title" content="Kubernetes - ConfigMaps &amp; Secrets" />
 <meta name="twitter:site" content="@rajesh_1432" />
 <meta name="twitter:creator" content="@Rajesh" />
 <script type="application/ld+json">
-{"description":"All about learning new technologies, articles based on the previous or present experience.","@type":"BlogPosting","url":"http://localhost:4000/2020/11/19/kubernetes-config.html","headline":"Kubernetes - ConfigMaps","dateModified":"2020-11-19T00:00:00-08:00","datePublished":"2020-11-19T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/11/19/kubernetes-config.html"},"author":{"@type":"Person","name":"Rajesh"},"@context":"https://schema.org"}</script>
+{"description":"All about learning new technologies, articles based on the previous or present experience.","headline":"Kubernetes - ConfigMaps &amp; Secrets","dateModified":"2020-11-19T00:00:00-08:00","datePublished":"2020-11-19T00:00:00-08:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/11/19/kubernetes-config.html"},"url":"http://localhost:4000/2020/11/19/kubernetes-config.html","author":{"@type":"Person","name":"Rajesh"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="stylesheet" href="/assets/css/main.css">
@@ -115,7 +115,7 @@
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Kubernetes - ConfigMaps</h1>
+    <h1 class="post-title p-name" itemprop="name headline">Kubernetes - ConfigMaps &amp; Secrets</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="2020-11-19T00:00:00-08:00" itemprop="datePublished">Nov 19, 2020
       </time></p>
@@ -129,60 +129,63 @@
     </a>
 </div>
 
-<p>ConfigMaps in kubernetes are a flexible way of storing the non confidential information in key value pairs, that are needed by the pods during runtime. If you are a Kubernetes Developer, you have already aware of the configmaps and how to use them in the pod definition yaml files. This article is about to share the information what If we configured the configmaps in a wrong way or what are runtime errors we may come across when accessing the configmap values.</p>
+<p>One of the features that we can leverage, when we are working with Kubernetes is the ConfigMap. This is used to store the non-confidential information required by the pods. Do remember that, It is not suggested to store the confidential or secret information in the ConfigMaps.</p>
 
-<p>Now, let us start with creating the configmap using the kubectl command [its called the imperative way of creating resources in kuberntes]</p>
+<p>Let us see how to create a configmap using both imperative way and with the yaml file.</p>
 
-<p>kubectl create configmap name-of-config –from-literal=keyname=value –from-literal=keyname=value …</p>
+<p>$kubectl create configmap <config map="" name=""> --from-literal=<keyname>=<value></value></keyname></config></p>
 
-<p>kubectl create configmap name-of-config –from-file=file-path-here.properties</p>
+<p>Common Mistakes:
+kubectl create configmap demo-configmap –from-literal=mykey:myvalue
+error: invalid literal source mykey:myvalue, expected key=value</p>
 
-<p>You can reference the confimap in one of the below ways depending on your requirement</p>
+<p>Remember: You should use the = instead of :
+Remember: You can not use spaces in the key</p>
 
-<h1 id="reference-from-the-env">Reference from the env</h1>
-<p>envFrom:</p>
-<ul>
-  <li>configMapRef:
-  name: app-config</li>
-</ul>
+<p>Finally, the regular expression that used to validate the configmap key is ‘[-._a-zA-Z0-9]+’)
+So, Do remember that you always give a valid key while creating the configmap in Kubernetes.</p>
 
-<h1 id="reference-from-single-env">Reference from Single env</h1>
-<p>env:</p>
-<ul>
-  <li>name: APP_COLOR
-valueFrom:
-  configMapKeyRef:
-    name: app-config
-    key: APP_COLOR</li>
-</ul>
+<p>How to create multiple key, value pairs using imperative command?</p>
 
-<h1 id="reference-from-a-volume">Reference from a volume</h1>
-<p>volumes:</p>
-<ul>
-  <li>name: app-config-volume
-configMap:
-  name: app-config</li>
-</ul>
+<p>$kubectl create configmap <config map="" name=""> --from-literal=<keyname1>=<value1> --from-literal=<keyname2>=<value2> ...</value2></keyname2></value1></keyname1></config></p>
 
-<ol>
-  <li>When you create the configmap in an imperative way, if you make a mistake as below</li>
-</ol>
+<p>Let us see, how does our demo-configmap looks in a YAML format</p>
 
-<p>kubectl create configmap webapp-config-mapp –from-literal APP_COLOR:darkblue</p>
+<p>$ kubectl get configmap demo-configmap -o yaml
+apiVersion: v1
+data:
+  keyname1: value1
+  keyname2: value2
+kind: ConfigMap
+metadata:
+  creationTimestamp: “2020-12-06T02:27:44Z”
+  name: demo-configmap
+  namespace: default
+  resourceVersion: “702943”
+  selfLink: /api/v1/namespaces/default/configmaps/demo-configmap
+  uid: c6d1cee8-7707-4e05-95e9-e848ce65f631</p>
 
-<p>Then, it will throw an error “error: invalid literal source APP_COLOR:darkblue, expected key=value”</p>
+<p>Now, the next step is on how to create configmap from file (also provide json file)
+$kubectl create configmap file-config –from-file=config-from-file.conf</p>
 
-<ol>
-  <li>
-    <p>Create a configmap without a name,</p>
+<p>You can also, provide multiple files to create the configmap or a directory as shown below.</p>
 
-    <p>kubectl create configmap –from-literal=APP_COLOR=green</p>
+<p>$kubectl create configmap file-config –from-file=config-from-file1.conf –from-file=config-from-file2.conf</p>
 
-    <p>then it will throw the below error</p>
+<p>$kubectl create configmap file-config –from-file=<directory path=""></directory></p>
 
-    <p>error: exactly one NAME is required, got 0</p>
-  </li>
-</ol>
+<p>Check the file, that you have created. if you do not provide the config file name, then it will take the file name as config name.
+$ kubectl get configmap file-config -o yaml</p>
+
+<p>apiVersion: v1
+data:
+  config-from-file.conf: |+
+    KEY1=VALUE1
+    KEY2=VALUE2
+kind: ConfigMap
+metadata:
+  name: file-config
+  namespace: default</p>
 
 
   </div><a class="u-url" href="/2020/11/19/kubernetes-config.html" hidden></a>

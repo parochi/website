@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-11-28T15:17:23-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>All about learning new technologies, articles based on the previous or present experience.</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="http://localhost:4000/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/go-concurrency</id><content type="html" xml:base="http://localhost:4000/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-07T20:19:20-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>All about learning new technologies, articles based on the previous or present experience.</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="http://localhost:4000/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/go-concurrency</id><content type="html" xml:base="http://localhost:4000/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -200,67 +200,70 @@ Yes, Channel is a great way of sending and receiving the values. A typical chann
 
 &lt;p&gt;For more information, it is always recommended to go through the Effective  &lt;a href=&quot;https://golang.org/doc/effective_go.html#concurrency&quot;&gt;Go concurrency&lt;/a&gt;  documentation.&lt;/p&gt;
 
-&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Kubernetes - ConfigMaps</title><link href="http://localhost:4000/2020/11/19/kubernetes-config.html" rel="alternate" type="text/html" title="Kubernetes - ConfigMaps" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/kubernetes-config</id><content type="html" xml:base="http://localhost:4000/2020/11/19/kubernetes-config.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Kubernetes - ConfigMaps &amp;amp; Secrets</title><link href="http://localhost:4000/2020/11/19/kubernetes-config.html" rel="alternate" type="text/html" title="Kubernetes - ConfigMaps &amp;amp; Secrets" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/kubernetes-config</id><content type="html" xml:base="http://localhost:4000/2020/11/19/kubernetes-config.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-26.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 
-&lt;p&gt;ConfigMaps in kubernetes are a flexible way of storing the non confidential information in key value pairs, that are needed by the pods during runtime. If you are a Kubernetes Developer, you have already aware of the configmaps and how to use them in the pod definition yaml files. This article is about to share the information what If we configured the configmaps in a wrong way or what are runtime errors we may come across when accessing the configmap values.&lt;/p&gt;
+&lt;p&gt;One of the features that we can leverage, when we are working with Kubernetes is the ConfigMap. This is used to store the non-confidential information required by the pods. Do remember that, It is not suggested to store the confidential or secret information in the ConfigMaps.&lt;/p&gt;
 
-&lt;p&gt;Now, let us start with creating the configmap using the kubectl command [its called the imperative way of creating resources in kuberntes]&lt;/p&gt;
+&lt;p&gt;Let us see how to create a configmap using both imperative way and with the yaml file.&lt;/p&gt;
 
-&lt;p&gt;kubectl create configmap name-of-config –from-literal=keyname=value –from-literal=keyname=value …&lt;/p&gt;
+&lt;p&gt;$kubectl create configmap &lt;config map=&quot;&quot; name=&quot;&quot;&gt; --from-literal=&lt;keyname&gt;=&lt;value&gt;&lt;/value&gt;&lt;/keyname&gt;&lt;/config&gt;&lt;/p&gt;
 
-&lt;p&gt;kubectl create configmap name-of-config –from-file=file-path-here.properties&lt;/p&gt;
+&lt;p&gt;Common Mistakes:
+kubectl create configmap demo-configmap –from-literal=mykey:myvalue
+error: invalid literal source mykey:myvalue, expected key=value&lt;/p&gt;
 
-&lt;p&gt;You can reference the confimap in one of the below ways depending on your requirement&lt;/p&gt;
+&lt;p&gt;Remember: You should use the = instead of :
+Remember: You can not use spaces in the key&lt;/p&gt;
 
-&lt;h1 id=&quot;reference-from-the-env&quot;&gt;Reference from the env&lt;/h1&gt;
-&lt;p&gt;envFrom:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;configMapRef:
-  name: app-config&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Finally, the regular expression that used to validate the configmap key is ‘[-._a-zA-Z0-9]+’)
+So, Do remember that you always give a valid key while creating the configmap in Kubernetes.&lt;/p&gt;
 
-&lt;h1 id=&quot;reference-from-single-env&quot;&gt;Reference from Single env&lt;/h1&gt;
-&lt;p&gt;env:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;name: APP_COLOR
-valueFrom:
-  configMapKeyRef:
-    name: app-config
-    key: APP_COLOR&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;How to create multiple key, value pairs using imperative command?&lt;/p&gt;
 
-&lt;h1 id=&quot;reference-from-a-volume&quot;&gt;Reference from a volume&lt;/h1&gt;
-&lt;p&gt;volumes:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;name: app-config-volume
-configMap:
-  name: app-config&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;$kubectl create configmap &lt;config map=&quot;&quot; name=&quot;&quot;&gt; --from-literal=&lt;keyname1&gt;=&lt;value1&gt; --from-literal=&lt;keyname2&gt;=&lt;value2&gt; ...&lt;/value2&gt;&lt;/keyname2&gt;&lt;/value1&gt;&lt;/keyname1&gt;&lt;/config&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;When you create the configmap in an imperative way, if you make a mistake as below&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Let us see, how does our demo-configmap looks in a YAML format&lt;/p&gt;
 
-&lt;p&gt;kubectl create configmap webapp-config-mapp –from-literal APP_COLOR:darkblue&lt;/p&gt;
+&lt;p&gt;$ kubectl get configmap demo-configmap -o yaml
+apiVersion: v1
+data:
+  keyname1: value1
+  keyname2: value2
+kind: ConfigMap
+metadata:
+  creationTimestamp: “2020-12-06T02:27:44Z”
+  name: demo-configmap
+  namespace: default
+  resourceVersion: “702943”
+  selfLink: /api/v1/namespaces/default/configmaps/demo-configmap
+  uid: c6d1cee8-7707-4e05-95e9-e848ce65f631&lt;/p&gt;
 
-&lt;p&gt;Then, it will throw an error “error: invalid literal source APP_COLOR:darkblue, expected key=value”&lt;/p&gt;
+&lt;p&gt;Now, the next step is on how to create configmap from file (also provide json file)
+$kubectl create configmap file-config –from-file=config-from-file.conf&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Create a configmap without a name,&lt;/p&gt;
+&lt;p&gt;You can also, provide multiple files to create the configmap or a directory as shown below.&lt;/p&gt;
 
-    &lt;p&gt;kubectl create configmap –from-literal=APP_COLOR=green&lt;/p&gt;
+&lt;p&gt;$kubectl create configmap file-config –from-file=config-from-file1.conf –from-file=config-from-file2.conf&lt;/p&gt;
 
-    &lt;p&gt;then it will throw the below error&lt;/p&gt;
+&lt;p&gt;$kubectl create configmap file-config –from-file=&lt;directory path=&quot;&quot;&gt;&lt;/directory&gt;&lt;/p&gt;
 
-    &lt;p&gt;error: exactly one NAME is required, got 0&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;p&gt;Check the file, that you have created. if you do not provide the config file name, then it will take the file name as config name.
+$ kubectl get configmap file-config -o yaml&lt;/p&gt;
+
+&lt;p&gt;apiVersion: v1
+data:
+  config-from-file.conf: |+
+    KEY1=VALUE1
+    KEY2=VALUE2
+kind: ConfigMap
+metadata:
+  name: file-config
+  namespace: default&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-18.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
