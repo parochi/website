@@ -88,7 +88,7 @@ localbuild:
     */
     var disqus_config = function () {
     this.page.url = "https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "20201119"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = "20201117"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE
