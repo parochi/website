@@ -20,54 +20,34 @@ These Go routines are unique and they are not operating system threads. It is a 
 
 Enough of the concepts, let us delve into the code and apply these concepts. First, we will implement some example code to understand the concepts, after that we will do an identical code that we typically use in production. A typical goroutine is written below.
 
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
-2
-3
-4
-5</pre></td><td><pre style="margin: 0; line-height: 125%">sayHello := <span style="color: #000080; font-weight: bold">func</span>() {
-    fmt.Println(<span style="color: #0000FF">&quot;Techiebar is awesome!&quot;</span>)
+<pre><code class="go">
+sayHello := func() {
+    fmt.Println("Techiebar is awesome!")
 }
-<span style="color: #000080; font-weight: bold">go</span> sayHello()
-<span style="color: #008800; font-style: italic">// continue doing rest of your code</span>
-</pre></td></tr></table></div>
-
+go sayHello()
+// continue doing rest of your code
+</code></pre>
 
 Now, when you execute the above snippet, you might not see the output string `Techiebar is awesome!` that is due to the fact that the main thread might get finished its job well before the goroutine. One of the ways to handle this issue is by using Go `sync` package, check the below snippet.
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #000080; font-weight: bold">var</span> wg sync.WaitGroup
+<pre><code class="go">
+var wg sync.WaitGroup
 
-wg.Add(<span style="color: #0000FF">1</span>)                       
-<span style="color: #000080; font-weight: bold">go</span> <span style="color: #000080; font-weight: bold">func</span>() {
-    <span style="color: #000080; font-weight: bold">defer</span> wg.Done()             
-    fmt.Println(<span style="color: #0000FF">&quot;7:00AM Techiebar is closed!&quot;</span>)
+wg.Add(1)                       
+go func() {
+    defer wg.Done()             
+    fmt.Println("7:00AM Techiebar is closed!")
 }()
 
-wg.Add(<span style="color: #0000FF">1</span>)                       
-<span style="color: #000080; font-weight: bold">go</span> <span style="color: #000080; font-weight: bold">func</span>() {
-    <span style="color: #000080; font-weight: bold">defer</span> wg.Done()             
-    fmt.Println(<span style="color: #0000FF">&quot;5:00PM Techiebar is Opened!&quot;</span>)
+wg.Add(1)                       
+go func() {
+    defer wg.Done()             
+    fmt.Println("5:00PM Techiebar is Opened!")
 }()
 
 wg.Wait()                       
-fmt.Println(<span style="color: #0000FF">&quot;All goroutines completed.&quot;</span>)
-</pre></td></tr></table></div>
-
+fmt.Println("All goroutines completed.")
+</code></pre>
  
 `WaitGroup` is a great way to wait for a set of concurrent operations to complete when you either don’t care about the result of the concurrent operation or you have other plans to collect the results.
  
@@ -76,132 +56,74 @@ There is another interesting method in the sync package is `once.Do(<calling met
 Now, the interesting concept is about co-ordinating the multiple Goroutines using channels.
 Yes, Channel is a great way of sending and receiving the values. A typical channel example looks like below.
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #000080; font-weight: bold">func</span> main() {
-  <span style="color: #008800; font-style: italic">//We have some integers</span>
-  elems := []<span style="color: #000080; font-weight: bold">int</span>{<span style="color: #0000FF">1</span>, <span style="color: #0000FF">2</span>, <span style="color: #0000FF">3</span>, <span style="color: #0000FF">4</span>, <span style="color: #0000FF">5</span>, <span style="color: #0000FF">0</span>} 
+<pre><code class="go">
+func main() {
+  //We have some integers
+  elems := []int{1, 2, 3, 4, 5, 0} 
 
-  <span style="color: #008800; font-style: italic">//Handle the sum of all integers</span>
+  //Handle the sum of all integers
 
-  sum := <span style="color: #000080; font-weight: bold">func</span>(s []<span style="color: #000080; font-weight: bold">int</span>, c <span style="color: #000080; font-weight: bold">chan</span> <span style="color: #000080; font-weight: bold">int</span>) {
-    sum := <span style="color: #0000FF">0</span>
-    <span style="color: #000080; font-weight: bold">for</span> _, v := <span style="color: #000080; font-weight: bold">range</span> s {
+  sum := func(s []int, c chan int) {
+    sum := 0
+    for _, v := range s {
       sum += v
     }
-    c &lt;- sum <span style="color: #008800; font-style: italic">// sending sum to the channel</span>
+    c &lt;- sum // sending sum to the channel
   }
-  <span style="color: #008800; font-style: italic">//We have created a channel of type int</span>
-  <span style="color: #008800; font-style: italic">//Do note that, the channel can hold only one integer value</span>
-  <span style="color: #008800; font-style: italic">// at a time</span>
-  receiver := make(<span style="color: #000080; font-weight: bold">chan</span> <span style="color: #000080; font-weight: bold">int</span>)
-  <span style="color: #000080; font-weight: bold">go</span> sum(elems, receiver)
-  total := &lt;-receiver <span style="color: #008800; font-style: italic">// receiver returns the result of the sum</span>
+  //We have created a channel of type int
+  //Do note that, the channel can hold only one integer value
+  // at a time
+  receiver := make(chan int)
+  go sum(elems, receiver)
+  total := &lt;-receiver // receiver returns the result of the sum
 
   fmt.Println(total)
 }
-</pre></td></tr></table></div>
-
+</code></pre>
  
 So far everything is fine, we have routines, waitGroups, channels. But, what does a typical production code looks like to use channels with multiple goroutines. Now, let us take an example scenario where we have some 1000 requests[In production we will face 1000's requests] that need to be processed and each request is independent and can be processed with a separate goroutine. That means if we spawn 10 goroutines as a worker pool to process the 1000 requests. Let us see how the code looks like.
 
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic">//FullName is first + last name</span>
-<span style="color: #000080; font-weight: bold">type</span> FullName <span style="color: #000080; font-weight: bold">struct</span> {
-	FirstName <span style="color: #000080; font-weight: bold">string</span>
-	LastName  <span style="color: #000080; font-weight: bold">string</span>
+<pre><code class="go">
+//FullName is first + last name
+type FullName struct {
+	FirstName string
+	LastName  string
 }
 
-<span style="color: #000080; font-weight: bold">func</span> main() {
-	fnChannel := make(<span style="color: #000080; font-weight: bold">chan</span> FullName)
-	totalWorkers := <span style="color: #0000FF">10</span>
-	<span style="color: #000080; font-weight: bold">var</span> wg sync.WaitGroup
+func main() {
+	fnChannel := make(chan FullName)
+	totalWorkers := 10
+	var wg sync.WaitGroup
 
-	<span style="color: #008800; font-style: italic">// You have created 10 routines to handle your 1000 requests</span>
-	<span style="color: #000080; font-weight: bold">for</span> i := <span style="color: #0000FF">0</span>; i &lt; totalWorkers; i++ {
-		wg.Add(<span style="color: #0000FF">1</span>)
-		<span style="color: #000080; font-weight: bold">go</span> <span style="color: #000080; font-weight: bold">func</span>() {
-			<span style="color: #000080; font-weight: bold">defer</span> wg.Done()
-			<span style="color: #000080; font-weight: bold">for</span> fn := <span style="color: #000080; font-weight: bold">range</span> fnChannel {
+	// You have created 10 routines to handle your 1000 requests
+	for i := 0; i &lt; totalWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for fn := range fnChannel {
 				printFullName(fn)
 			}
 		}()
 	}
 
-	<span style="color: #008800; font-style: italic">// You have 1000 requests, needs to be processed</span>
-	<span style="color: #000080; font-weight: bold">for</span> j := <span style="color: #0000FF">0</span>; j &lt;= <span style="color: #0000FF">1000</span>; j++ {
-		<span style="color: #008800; font-style: italic">// You are pushing one by one to the channel</span>
+	// You have 1000 requests, needs to be processed
+	for j := 0; j &lt;= 1000; j++ {
+		// You are pushing one by one to the channel
 		fnChannel &lt;- FullName{
-			FirstName: fmt.Sprintf(<span style="color: #0000FF">&quot;F%d&quot;</span>, j),
-			LastName:  fmt.Sprintf(<span style="color: #0000FF">&quot;L%d&quot;</span>, j),
+			FirstName: fmt.Sprintf("F%d", j),
+			LastName:  fmt.Sprintf("L%d", j),
 		}
 	}
 	close(fnChannel)
 	wg.Wait()
-	fmt.Println(<span style="color: #0000FF">&quot;Everything completed&quot;</span>)
+	fmt.Println("Everything completed")
 
 }
 
-<span style="color: #000080; font-weight: bold">func</span> printFullName(fn FullName) {
-	fmt.Printf(<span style="color: #0000FF">&quot;%s %s\n&quot;</span>, fn.FirstName, fn.LastName)
+func printFullName(fn FullName) {
+	fmt.Printf("%s %s\n", fn.FirstName, fn.LastName)
 }
-</pre></td></tr></table></div>
+</code></pre>
 
  
 In the above example code, at line number 8 we have created a channel that accepts the `FullName` data structure and we have created 10 workers to take up our task of processing the full name. Finally, at line number 26 we started pushing the data to the channel. Now all the 10 goroutines start processing the given data and accept another set of data until the channel is closed.
@@ -209,3 +131,23 @@ In the above example code, at line number 8 we have created a channel that accep
 For more information, it is always recommended to go through the Effective  [Go concurrency](https://golang.org/doc/effective_go.html#concurrency)  documentation.
  
 Share your constructive comments or suggestions to improve the content. 
+
+<div id="disqus_thread"></div>
+<script>
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = "https://www.parochi.xyz/2020/11/19/go-concurrency.html";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "20201119"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

@@ -16,30 +16,45 @@ layout: default
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>{{ page.title }} - {{ site.title }}</title>
+  <title>{{ site.title }} - {{ page.title }}</title>
   {% seo %}
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <script data-ad-client="ca-pub-2306892121469167" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body style="padding-bottom:20px;"> 
  {% include navbar.html %}
-<div class="container">
-  &nbsp;
-  <!-- Ad Placement -->
+
+<div class="container-fluid bg-main-subtitle">
+  <div class="container">
+    <div class="col-12 font-read-text font-main-subtitle"> 
+    <br/>
+    A Developer's Weekly <br/>Saga;
+    <br/>
+    <br/>
+    </div>
+  </div>
 </div>
 
 <div class="container">
+<p>&nbsp;</p>
+</div>
+
+
+<div class="container">
   <div class="row">
-      <div class="col-10 font-read-text"> 
+      <div class="col-12 font-read-text"> 
         {{ content }}
         <br/>
       </div>
+      <!--
       <div class="col-2"> 
         <div class="row h-100 mt-5">
         </div>
       </div>
+      -->
   </div>
 </div>
+
  {% include footer.html %}
 </body>
 </html>

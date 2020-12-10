@@ -1,11 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@600&display=swap");
-.bg-brand-nav { background-color: #48BBED; }
+.navbar-light .navbar-brand { color: #48BBED !important; }
 
-.font-brand-nav { font-family: 'Montserrat Alternates', sans-serif; font-size: 2rem !important; }
+.navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show > .nav-link { color: #FFFFFF; }
 
-.font-brand-menu { font-size: 1.5rem !important; }
+.navbar-light .navbar-nav .nav-link { color: #FFFFFF; }
+
+a.custom-card, a.custom-card:hover { color: inherit; text-decoration: none !important; }
+
+.stretched-link::after { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; pointer-events: auto; content: ""; background-color: rgba(0, 0, 0, 0); }
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover { color: #ccc !important; }
+
+.bg-brand-nav { background-color: #FFFFFF; }
+
+.font-read-text-custom { font-size: 1rem !important; }
+
+.bg-main-subtitle { background-color: #48BBED; }
+
+.font-brand-nav { font-family: 'Montserrat Alternates', sans-serif; font-size: 3rem !important; color: #007bff; display: inline-block; }
+
+.font-brand-menu { font-size: 1.5rem !important; color: #007bff; }
 
 .font-read-text { font-size: 1.3rem !important; }
+
+.font-main-subtitle { font-family: sans-serif; font-weight: bold; font-size: 5rem !important; }
 
 navbar { border-bottom: 1px solid #0e678e; }
 

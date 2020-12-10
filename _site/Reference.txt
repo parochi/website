@@ -4,3 +4,15 @@
     JEKYLL_ENV=production bundle exec jekyll build
 3. To install gems
     gem install bundler jekyll
+
+
+
+
+<div class="card" style="width: 20rem;">
+  <img src="/assets/images/2020-11-19.png" class="card-img-top" alt="2020-11-19.png">
+  <div class="card-body">
+    <h5 class="card-title">Go Concurrency - A typical production use</h5>
+    <p class="card-text">Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept "Do not communicate by sharing memory; instead, share memory by communicating".</p>
+    <a href="#" class="btn btn-primary stretched-link">Go somewhere</a>
+  </div>
+</div>

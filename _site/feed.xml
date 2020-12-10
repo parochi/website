@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-07T20:19:20-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>All about learning new technologies, articles based on the previous or present experience.</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="http://localhost:4000/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/go-concurrency</id><content type="html" xml:base="http://localhost:4000/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-09T18:12:44-08:00</updated><id>/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>/2020/11/19/go-concurrency</id><content type="html" xml:base="/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -13,53 +13,34 @@
 
 &lt;p&gt;Enough of the concepts, let us delve into the code and apply these concepts. First, we will implement some example code to understand the concepts, after that we will do an identical code that we typically use in production. A typical goroutine is written below.&lt;/p&gt;
 
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;1
-2
-3
-4
-5&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;sayHello := &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt;() {
-    fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Techiebar is awesome!&amp;quot;&lt;/span&gt;)
+&lt;pre&gt;&lt;code class=&quot;go&quot;&gt;
+sayHello := func() {
+    fmt.Println(&quot;Techiebar is awesome!&quot;)
 }
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;go&lt;/span&gt; sayHello()
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// continue doing rest of your code&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+go sayHello()
+// continue doing rest of your code
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Now, when you execute the above snippet, you might not see the output string &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Techiebar is awesome!&lt;/code&gt; that is due to the fact that the main thread might get finished its job well before the goroutine. One of the ways to handle this issue is by using Go &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sync&lt;/code&gt; package, check the below snippet.&lt;/p&gt;
 
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;var&lt;/span&gt; wg sync.WaitGroup
+&lt;pre&gt;&lt;code class=&quot;go&quot;&gt;
+var wg sync.WaitGroup
 
-wg.Add(&lt;span style=&quot;color: #0000FF&quot;&gt;1&lt;/span&gt;)                       
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;go&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt;() {
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;defer&lt;/span&gt; wg.Done()             
-    fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;7:00AM Techiebar is closed!&amp;quot;&lt;/span&gt;)
+wg.Add(1)                       
+go func() {
+    defer wg.Done()             
+    fmt.Println(&quot;7:00AM Techiebar is closed!&quot;)
 }()
 
-wg.Add(&lt;span style=&quot;color: #0000FF&quot;&gt;1&lt;/span&gt;)                       
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;go&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt;() {
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;defer&lt;/span&gt; wg.Done()             
-    fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;5:00PM Techiebar is Opened!&amp;quot;&lt;/span&gt;)
+wg.Add(1)                       
+go func() {
+    defer wg.Done()             
+    fmt.Println(&quot;5:00PM Techiebar is Opened!&quot;)
 }()
 
 wg.Wait()                       
-fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;All goroutines completed.&amp;quot;&lt;/span&gt;)
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+fmt.Println(&quot;All goroutines completed.&quot;)
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WaitGroup&lt;/code&gt; is a great way to wait for a set of concurrent operations to complete when you either don’t care about the result of the concurrent operation or you have other plans to collect the results.&lt;/p&gt;
 
@@ -68,202 +49,101 @@ fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;All goroutine
 &lt;p&gt;Now, the interesting concept is about co-ordinating the multiple Goroutines using channels.
 Yes, Channel is a great way of sending and receiving the values. A typical channel example looks like below.&lt;/p&gt;
 
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt; main() {
-  &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;//We have some integers&lt;/span&gt;
-  elems := []&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;int&lt;/span&gt;{&lt;span style=&quot;color: #0000FF&quot;&gt;1&lt;/span&gt;, &lt;span style=&quot;color: #0000FF&quot;&gt;2&lt;/span&gt;, &lt;span style=&quot;color: #0000FF&quot;&gt;3&lt;/span&gt;, &lt;span style=&quot;color: #0000FF&quot;&gt;4&lt;/span&gt;, &lt;span style=&quot;color: #0000FF&quot;&gt;5&lt;/span&gt;, &lt;span style=&quot;color: #0000FF&quot;&gt;0&lt;/span&gt;} 
+&lt;pre&gt;&lt;code class=&quot;go&quot;&gt;
+func main() {
+  //We have some integers
+  elems := []int{1, 2, 3, 4, 5, 0} 
 
-  &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;//Handle the sum of all integers&lt;/span&gt;
+  //Handle the sum of all integers
 
-  sum := &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt;(s []&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;int&lt;/span&gt;, c &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;chan&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;int&lt;/span&gt;) {
-    sum := &lt;span style=&quot;color: #0000FF&quot;&gt;0&lt;/span&gt;
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;for&lt;/span&gt; _, v := &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;range&lt;/span&gt; s {
+  sum := func(s []int, c chan int) {
+    sum := 0
+    for _, v := range s {
       sum += v
     }
-    c &amp;lt;- sum &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// sending sum to the channel&lt;/span&gt;
+    c &amp;lt;- sum // sending sum to the channel
   }
-  &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;//We have created a channel of type int&lt;/span&gt;
-  &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;//Do note that, the channel can hold only one integer value&lt;/span&gt;
-  &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// at a time&lt;/span&gt;
-  receiver := make(&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;chan&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;int&lt;/span&gt;)
-  &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;go&lt;/span&gt; sum(elems, receiver)
-  total := &amp;lt;-receiver &lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// receiver returns the result of the sum&lt;/span&gt;
+  //We have created a channel of type int
+  //Do note that, the channel can hold only one integer value
+  // at a time
+  receiver := make(chan int)
+  go sum(elems, receiver)
+  total := &amp;lt;-receiver // receiver returns the result of the sum
 
   fmt.Println(total)
 }
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So far everything is fine, we have routines, waitGroups, channels. But, what does a typical production code looks like to use channels with multiple goroutines. Now, let us take an example scenario where we have some 1000 requests[In production we will face 1000’s requests] that need to be processed and each request is independent and can be processed with a separate goroutine. That means if we spawn 10 goroutines as a worker pool to process the 1000 requests. Let us see how the code looks like.&lt;/p&gt;
 
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;//FullName is first + last name&lt;/span&gt;
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;type&lt;/span&gt; FullName &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;struct&lt;/span&gt; {
-	FirstName &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;string&lt;/span&gt;
-	LastName  &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;string&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;go&quot;&gt;
+//FullName is first + last name
+type FullName struct {
+	FirstName string
+	LastName  string
 }
 
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt; main() {
-	fnChannel := make(&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;chan&lt;/span&gt; FullName)
-	totalWorkers := &lt;span style=&quot;color: #0000FF&quot;&gt;10&lt;/span&gt;
-	&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;var&lt;/span&gt; wg sync.WaitGroup
+func main() {
+	fnChannel := make(chan FullName)
+	totalWorkers := 10
+	var wg sync.WaitGroup
 
-	&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// You have created 10 routines to handle your 1000 requests&lt;/span&gt;
-	&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;for&lt;/span&gt; i := &lt;span style=&quot;color: #0000FF&quot;&gt;0&lt;/span&gt;; i &amp;lt; totalWorkers; i++ {
-		wg.Add(&lt;span style=&quot;color: #0000FF&quot;&gt;1&lt;/span&gt;)
-		&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;go&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt;() {
-			&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;defer&lt;/span&gt; wg.Done()
-			&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;for&lt;/span&gt; fn := &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;range&lt;/span&gt; fnChannel {
+	// You have created 10 routines to handle your 1000 requests
+	for i := 0; i &amp;lt; totalWorkers; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for fn := range fnChannel {
 				printFullName(fn)
 			}
 		}()
 	}
 
-	&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// You have 1000 requests, needs to be processed&lt;/span&gt;
-	&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;for&lt;/span&gt; j := &lt;span style=&quot;color: #0000FF&quot;&gt;0&lt;/span&gt;; j &amp;lt;= &lt;span style=&quot;color: #0000FF&quot;&gt;1000&lt;/span&gt;; j++ {
-		&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;// You are pushing one by one to the channel&lt;/span&gt;
+	// You have 1000 requests, needs to be processed
+	for j := 0; j &amp;lt;= 1000; j++ {
+		// You are pushing one by one to the channel
 		fnChannel &amp;lt;- FullName{
-			FirstName: fmt.Sprintf(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;F%d&amp;quot;&lt;/span&gt;, j),
-			LastName:  fmt.Sprintf(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;L%d&amp;quot;&lt;/span&gt;, j),
+			FirstName: fmt.Sprintf(&quot;F%d&quot;, j),
+			LastName:  fmt.Sprintf(&quot;L%d&quot;, j),
 		}
 	}
 	close(fnChannel)
 	wg.Wait()
-	fmt.Println(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Everything completed&amp;quot;&lt;/span&gt;)
+	fmt.Println(&quot;Everything completed&quot;)
 
 }
 
-&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;func&lt;/span&gt; printFullName(fn FullName) {
-	fmt.Printf(&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;%s %s\n&amp;quot;&lt;/span&gt;, fn.FirstName, fn.LastName)
+func printFullName(fn FullName) {
+	fmt.Printf(&quot;%s %s\n&quot;, fn.FirstName, fn.LastName)
 }
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In the above example code, at line number 8 we have created a channel that accepts the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;FullName&lt;/code&gt; data structure and we have created 10 workers to take up our task of processing the full name. Finally, at line number 26 we started pushing the data to the channel. Now all the 10 goroutines start processing the given data and accept another set of data until the channel is closed.&lt;/p&gt;
 
 &lt;p&gt;For more information, it is always recommended to go through the Effective  &lt;a href=&quot;https://golang.org/doc/effective_go.html#concurrency&quot;&gt;Go concurrency&lt;/a&gt;  documentation.&lt;/p&gt;
 
-&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Kubernetes - ConfigMaps &amp;amp; Secrets</title><link href="http://localhost:4000/2020/11/19/kubernetes-config.html" rel="alternate" type="text/html" title="Kubernetes - ConfigMaps &amp;amp; Secrets" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/kubernetes-config</id><content type="html" xml:base="http://localhost:4000/2020/11/19/kubernetes-config.html">&lt;div class=&quot;view overlay&quot;&gt;
-	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-26.png&quot; alt=&quot;Card image cap&quot; /&gt;
-    &lt;a href=&quot;#!&quot;&gt;
-        &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
+&lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;
 
-&lt;p&gt;One of the features that we can leverage, when we are working with Kubernetes is the ConfigMap. This is used to store the non-confidential information required by the pods. Do remember that, It is not suggested to store the confidential or secret information in the ConfigMaps.&lt;/p&gt;
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = &quot;https://www.parochi.xyz/2020/11/19/go-concurrency.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = &quot;20201119&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+&lt;/script&gt;
 
-&lt;p&gt;Let us see how to create a configmap using both imperative way and with the yaml file.&lt;/p&gt;
-
-&lt;p&gt;$kubectl create configmap &lt;config map=&quot;&quot; name=&quot;&quot;&gt; --from-literal=&lt;keyname&gt;=&lt;value&gt;&lt;/value&gt;&lt;/keyname&gt;&lt;/config&gt;&lt;/p&gt;
-
-&lt;p&gt;Common Mistakes:
-kubectl create configmap demo-configmap –from-literal=mykey:myvalue
-error: invalid literal source mykey:myvalue, expected key=value&lt;/p&gt;
-
-&lt;p&gt;Remember: You should use the = instead of :
-Remember: You can not use spaces in the key&lt;/p&gt;
-
-&lt;p&gt;Finally, the regular expression that used to validate the configmap key is ‘[-._a-zA-Z0-9]+’)
-So, Do remember that you always give a valid key while creating the configmap in Kubernetes.&lt;/p&gt;
-
-&lt;p&gt;How to create multiple key, value pairs using imperative command?&lt;/p&gt;
-
-&lt;p&gt;$kubectl create configmap &lt;config map=&quot;&quot; name=&quot;&quot;&gt; --from-literal=&lt;keyname1&gt;=&lt;value1&gt; --from-literal=&lt;keyname2&gt;=&lt;value2&gt; ...&lt;/value2&gt;&lt;/keyname2&gt;&lt;/value1&gt;&lt;/keyname1&gt;&lt;/config&gt;&lt;/p&gt;
-
-&lt;p&gt;Let us see, how does our demo-configmap looks in a YAML format&lt;/p&gt;
-
-&lt;p&gt;$ kubectl get configmap demo-configmap -o yaml
-apiVersion: v1
-data:
-  keyname1: value1
-  keyname2: value2
-kind: ConfigMap
-metadata:
-  creationTimestamp: “2020-12-06T02:27:44Z”
-  name: demo-configmap
-  namespace: default
-  resourceVersion: “702943”
-  selfLink: /api/v1/namespaces/default/configmaps/demo-configmap
-  uid: c6d1cee8-7707-4e05-95e9-e848ce65f631&lt;/p&gt;
-
-&lt;p&gt;Now, the next step is on how to create configmap from file (also provide json file)
-$kubectl create configmap file-config –from-file=config-from-file.conf&lt;/p&gt;
-
-&lt;p&gt;You can also, provide multiple files to create the configmap or a directory as shown below.&lt;/p&gt;
-
-&lt;p&gt;$kubectl create configmap file-config –from-file=config-from-file1.conf –from-file=config-from-file2.conf&lt;/p&gt;
-
-&lt;p&gt;$kubectl create configmap file-config –from-file=&lt;directory path=&quot;&quot;&gt;&lt;/directory&gt;&lt;/p&gt;
-
-&lt;p&gt;Check the file, that you have created. if you do not provide the config file name, then it will take the file name as config name.
-$ kubectl get configmap file-config -o yaml&lt;/p&gt;
-
-&lt;p&gt;apiVersion: v1
-data:
-  config-from-file.conf: |+
-    KEY1=VALUE1
-    KEY2=VALUE2
-kind: ConfigMap
-metadata:
-  name: file-config
-  namespace: default&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-18.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -273,180 +153,122 @@ metadata:
 &lt;p&gt;There are multiple resources for the Kubernetes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl&lt;/code&gt; command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.&lt;/p&gt;
 
 &lt;p&gt;To Get the Context&lt;/p&gt;
-
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To get the current context&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
+# To get the current context
 $ kubectl config current-context
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To Display list of contexts&lt;/span&gt;
+# To Display list of contexts
 $ kubectl config get-contexts
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Now, create the namespace in the cluster&lt;/span&gt;
+# Now, create the namespace in the cluster
 $ kubectl create namespace &amp;lt;your namespace name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Use the namespace for the subsequent kubectl operations&lt;/span&gt;
+# Use the namespace for the subsequent kubectl operations
 $ kubectl config set-context --namespace=&amp;lt;your namespace name&amp;gt; --current
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Namespace Commands&lt;/p&gt;
-
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Describe the namespace&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
+# Describe the namespace
 $ kubectl describe namespace &amp;lt;your namespace name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Get the namespace details either in yaml or json&lt;/span&gt;
+# Get the namespace details either in yaml or json
 $ kubectl get namespace blog-ns -o json
 $ kubectl get namespace blog-ns -o yaml
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To list all the resources under a namespace&lt;/span&gt;
+# To list all the resources under a namespace
 $ kubectl get all -n &amp;lt;your namespace name&amp;gt; 
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;ConfigMap and Secretes Commands&lt;/p&gt;
-
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Create a config map&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
+# Create a config map
 $ kubectl create configmap &amp;lt;name of the config map&amp;gt; --from-literal=username=user --from-literal=hostname=host
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Create a secret&lt;/span&gt;
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Remember Secretes are namespace specific, they can not be accessed across the namespaces&lt;/span&gt;
+# Create a secret
+# Remember Secretes are namespace specific, they can not be accessed across the namespaces
 $ kubectl create secret generic &amp;lt;secret name&amp;gt; --from-literal=&amp;lt;key&amp;gt;=&amp;lt;value&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Whenever you store a secret, you should store them in a base64 format&lt;/span&gt;
+# Whenever you store a secret, you should store them in a base64 format
 $ echo -n &amp;lt;your password&amp;gt; | base64
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To decode the value&lt;/span&gt;
-$ echo -n &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;base 64 value&amp;#39;&lt;/span&gt; | base64 -decode
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+# To decode the value
+$ echo -n base64 value | base64 -decode
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Deployment and Pod Commands&lt;/p&gt;
-
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# List all the pods in all namespaces&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
+# List all the pods in all namespaces
 $ kubectl get pods --all-namespaces 
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Create a POD quickly&lt;/span&gt;
+# Create a POD quickly
 $ kubectl run &amp;lt;pod name&amp;gt; --image=busybox --restart=Never -n &amp;lt;your namespace&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# In some cases, you just need the pod yaml&lt;/span&gt;
+# In some cases, you just need the pod yaml
 $ kubectl run &amp;lt;pod name&amp;gt; --image=nginx --dry-run=client --restart=Never -n &amp;lt;your namespace&amp;gt; -o yaml
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Rolling Update of the deployment image&lt;/span&gt;
+# Rolling Update of the deployment image
 $ kubectl set image deployment/&amp;lt;deployment name&amp;gt; &amp;lt;containername&amp;gt;=&amp;lt;new image name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Restart the deployment&lt;/span&gt;
+# Restart the deployment
 $ kubectl rollout restart deployment/&amp;lt;deployment name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To undo the rollout&lt;/span&gt;
+# To undo the rollout
 $ kubectl rollout undo deployment/&amp;lt;deployment name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To know the rollout history of a deployment&lt;/span&gt;
+# To know the rollout history of a deployment
 $ kubectl rollout history deployment &amp;lt;deployment name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To view the logs&lt;/span&gt;
+# To view the logs
 $ kubectl logs &amp;lt;podname&amp;gt; --namespace=&amp;lt;namespace name&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To open the interactive shell to the pod&lt;/span&gt;
+# To open the interactive shell to the pod
 $ kubectl exec -it &amp;lt;pod name&amp;gt; --namespace=&amp;lt;namespace name&amp;gt; -- /bin/sh
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To check the evens on the pod&lt;/span&gt;
+# To check the evens on the pod
 $ kubectl describe pod &amp;lt;pod name&amp;gt; | grep -C 10 Events:
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Extract a pod definition yaml file to local file&lt;/span&gt;
+# Extract a pod definition yaml file to local file
 $ kubectl get pod &amp;lt;podname&amp;gt; -o yaml &amp;gt; &amp;lt;local pod filename&amp;gt;.yaml
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
-
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Searching or Listing Commands&lt;/p&gt;
-
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# List the resources in a sorted order by any of the metadata&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
+# List the resources in a sorted order by any of the metadata
 $ kubectl get services --sort-by=.metadata.name
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Get the particular fields displayed from the resources&lt;/span&gt;
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# If it is a list then, use names[*].abc&lt;/span&gt;
-$ kkubectl get services -A -o custom-columns=&lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;NAME:metadata.name&amp;#39;&lt;/span&gt;
+# Get the particular fields displayed from the resources
+# If it is a list then, use names[*].abc
+$ kubectl get services -A -o custom-columns=NAME:metadata.name;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# List the resources with specific label&lt;/span&gt;
+# List the resources with specific label
 $ kubectl get pod -l &amp;lt;label name&amp;gt;=&amp;lt;label value&amp;gt;
 $ kubectl get pods --selector &amp;lt;label name&amp;gt;=&amp;lt;label value&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# To list all of the resources matching with the label&lt;/span&gt;
+# To list all of the resources matching with the label
 $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  &lt;a href=&quot;https://kubernetes.io/docs/home/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;p&gt;All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  &lt;a href=&quot;https://kubernetes.io/docs/home/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = &quot;https://www.parochi.xyz/2020/11/18/day-to-day-kubernetes.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = &quot;20201119&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-17.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -472,102 +294,75 @@ $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;
 
 &lt;p&gt;The below sample make file is specific to Go language-based environment but I believe the idea can be used to leverage with any other project.&lt;/p&gt;
 
-&lt;!-- HTML generated using hilite.me --&gt;
-&lt;div style=&quot;background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt; 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49&lt;/pre&gt;&lt;/td&gt;&lt;td&gt;&lt;pre style=&quot;margin: 0; line-height: 125%&quot;&gt;&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Enable dependencies and configure the private repo&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&quot;Makefile&quot;&gt;
+# Enable dependencies and configure the private repo
 GO = GO111MODULE=on GOPRIVATE=&amp;lt;your private repo&amp;gt;.cisco.com
 EXEFILE = ./bin/&amp;lt;exe file name&amp;gt;
 MAIN_GO = &amp;lt;your service main.go file location&amp;gt;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# help messages&lt;/span&gt;
+# help messages
 help:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;Available commands for the &amp;lt;your micro service name&amp;gt;&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;Usage&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  all - Run all the available commands&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  clean - Run the clean up&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  setup -  Run the initial setup instructions&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  format - Run code format&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  staticanalysis - Run the static code analysis&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  dependencies - Run the dependencies&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  unittest - Run unit tests&amp;#39;&lt;/span&gt;
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39;  localbuild - Build the executable&amp;#39;&lt;/span&gt;
+    @echo &amp;#39;Available commands for the &amp;lt;your micro service name&amp;gt;&amp;#39;
+    @echo &amp;#39;Usage&amp;#39;
+    @echo &amp;#39;  all - Run all the available commands&amp;#39;
+    @echo &amp;#39;  clean - Run the clean up&amp;#39;
+    @echo &amp;#39;  setup -  Run the initial setup instructions&amp;#39;
+    @echo &amp;#39;  format - Run code format&amp;#39;
+    @echo &amp;#39;  staticanalysis - Run the static code analysis&amp;#39;
+    @echo &amp;#39;  dependencies - Run the dependencies&amp;#39;
+    @echo &amp;#39;  unittest - Run unit tests&amp;#39;
+    @echo &amp;#39;  localbuild - Build the executable&amp;#39;
 
-&lt;span style=&quot;color: #008800; font-style: italic&quot;&gt;# Run all the available commands in the below order&lt;/span&gt;
-all: &lt;span style=&quot;color: #0000FF&quot;&gt;clean setup dependencies format staticanalysis unittest localbuild&lt;/span&gt;
+# Run all the available commands in the below order
+all: clean setup dependencies format staticanalysis unittest localbuild
 
 clean:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Cleaning the previous executable and coverage reports&amp;quot;&lt;/span&gt;
+    @echo &amp;quot;Cleaning the previous executable and coverage reports&amp;quot;
     rm -f coveragereport.out report.json
-    rm -f &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;EXEFILE &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt;
+    rm -f ${EXEFILE }
 
 setup:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Add any steps that are needed&amp;quot;&lt;/span&gt;
+    @echo &amp;quot;Add any steps that are needed&amp;quot;
     &amp;lt;some installation tasks&amp;gt;
 format:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Code Formatting&amp;quot;&lt;/span&gt;
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; fmt ./...
+    @echo &amp;quot;Code Formatting&amp;quot;
+    ${GO} fmt ./...
 staticanalysis:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;
+    @echo &amp;quot;&amp;quot;
     golangci-lint run -c .golangci.yaml
 dependencies:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;#39; Load Dependencies&amp;#39;&lt;/span&gt;
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; mod tidy
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; mod download
+    @echo &amp;#39; Load Dependencies&amp;#39;
+    ${GO} mod tidy
+    ${GO} mod download
 unittest:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Executing Unit tests&amp;quot;&lt;/span&gt;
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; test -v covermode=atomic -count=1 ./... -coverprofile coveragereport.out
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; test -race test -covermode=atomic -count=1 ./... -json &amp;gt; report.json
+    @echo &amp;quot;Executing Unit tests&amp;quot;
+    ${GO} test -v covermode=atomic -count=1 ./... -coverprofile coveragereport.out
+    ${GO} test -race test -covermode=atomic -count=1 ./... -json &amp;gt; report.json
 localbuild:
-    @echo &lt;span style=&quot;color: #0000FF&quot;&gt;&amp;quot;Loca build&amp;quot;&lt;/span&gt;
-    &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; build -o &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;EXEFILE&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;${&lt;/span&gt;MAIN_GO&lt;span style=&quot;color: #000080; font-weight: bold&quot;&gt;}&lt;/span&gt;
+    @echo &amp;quot;Loca build&amp;quot;
+    ${GO} build -o ${EXEFILE} ${MAIN_GO}
     docker build -t &amp;lt;your tag name&amp;gt; .
     docker tag &amp;lt;your tag name&amp;gt; &amp;lt;your quay repo location&amp;gt;:latest
     docker push &amp;lt;your quay repo location&amp;gt;:latest
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry></feed>
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = &quot;https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = &quot;20201119&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry></feed>
