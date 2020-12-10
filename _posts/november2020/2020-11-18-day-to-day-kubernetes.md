@@ -118,7 +118,7 @@ All the above command reference is the typical actions we do as a Cloud Develope
     */
     var disqus_config = function () {
     this.page.url = "https://www.parochi.xyz/2020/11/18/day-to-day-kubernetes.html";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "20201119"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = "20201118"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE

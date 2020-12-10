@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-09T18:35:43-08:00</updated><id>/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>/2020/11/19/go-concurrency</id><content type="html" xml:base="/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-09T18:40:54-08:00</updated><id>/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>/2020/11/19/go-concurrency</id><content type="html" xml:base="/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -257,7 +257,7 @@ $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;
     */
     var disqus_config = function () {
     this.page.url = &quot;https://www.parochi.xyz/2020/11/18/day-to-day-kubernetes.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = &quot;20201119&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = &quot;20201118&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -354,7 +354,7 @@ localbuild:
     */
     var disqus_config = function () {
     this.page.url = &quot;https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = &quot;20201119&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.identifier = &quot;20201117&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE
