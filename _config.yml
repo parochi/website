@@ -23,7 +23,7 @@ sass:
 title: Parochi
 email: q.teqno@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  All about learning new technologies, articles based on the previous or present experience.
+  A Developers weekly Saga;
 author: Rajesh
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com

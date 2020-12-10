@@ -14,174 +14,118 @@ related_image: /assets/images/2020-11-18.jpg
 There are multiple resources for the Kubernetes `kubectl` command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.
 
 To Get the Context
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic"># To get the current context</span>
+<pre><code class="Bash">
+# To get the current context
 $ kubectl config current-context
 
-<span style="color: #008800; font-style: italic"># To Display list of contexts</span>
+# To Display list of contexts
 $ kubectl config get-contexts
 
-<span style="color: #008800; font-style: italic"># Now, create the namespace in the cluster</span>
+# Now, create the namespace in the cluster
 $ kubectl create namespace &lt;your namespace name&gt;
 
-<span style="color: #008800; font-style: italic"># Use the namespace for the subsequent kubectl operations</span>
+# Use the namespace for the subsequent kubectl operations
 $ kubectl config set-context --namespace=&lt;your namespace name&gt; --current
-</pre></td></tr></table></div>
+</code></pre>
 
-
- Namespace Commands 
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
-2
-3
-4
-5
-6
-7
-8
-9</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic"># Describe the namespace</span>
+Namespace Commands 
+<pre><code class="Bash">
+# Describe the namespace
 $ kubectl describe namespace &lt;your namespace name&gt;
 
-<span style="color: #008800; font-style: italic"># Get the namespace details either in yaml or json</span>
+# Get the namespace details either in yaml or json
 $ kubectl get namespace blog-ns -o json
 $ kubectl get namespace blog-ns -o yaml
 
-<span style="color: #008800; font-style: italic"># To list all the resources under a namespace</span>
+# To list all the resources under a namespace
 $ kubectl get all -n &lt;your namespace name&gt; 
-</pre></td></tr></table></div>
-
+</code></pre>
  ConfigMap and Secretes Commands 
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic"># Create a config map</span>
+<pre><code class="Bash">
+# Create a config map
 $ kubectl create configmap &lt;name of the config map&gt; --from-literal=username=user --from-literal=hostname=host
 
-<span style="color: #008800; font-style: italic"># Create a secret</span>
-<span style="color: #008800; font-style: italic"># Remember Secretes are namespace specific, they can not be accessed across the namespaces</span>
+# Create a secret
+# Remember Secretes are namespace specific, they can not be accessed across the namespaces
 $ kubectl create secret generic &lt;secret name&gt; --from-literal=&lt;key&gt;=&lt;value&gt;
 
-<span style="color: #008800; font-style: italic"># Whenever you store a secret, you should store them in a base64 format</span>
+# Whenever you store a secret, you should store them in a base64 format
 $ echo -n &lt;your password&gt; | base64
 
-<span style="color: #008800; font-style: italic"># To decode the value</span>
-$ echo -n <span style="color: #0000FF">&#39;base 64 value&#39;</span> | base64 -decode
-</pre></td></tr></table></div>
+# To decode the value
+$ echo -n base64 value | base64 -decode
+</code></pre>
 
 Deployment and Pod Commands
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic"># List all the pods in all namespaces</span>
+<pre><code class="Bash">
+# List all the pods in all namespaces
 $ kubectl get pods --all-namespaces 
 
-<span style="color: #008800; font-style: italic"># Create a POD quickly</span>
+# Create a POD quickly
 $ kubectl run &lt;pod name&gt; --image=busybox --restart=Never -n &lt;your namespace&gt;
 
-<span style="color: #008800; font-style: italic"># In some cases, you just need the pod yaml</span>
+# In some cases, you just need the pod yaml
 $ kubectl run &lt;pod name&gt; --image=nginx --dry-run=client --restart=Never -n &lt;your namespace&gt; -o yaml
 
-<span style="color: #008800; font-style: italic"># Rolling Update of the deployment image</span>
+# Rolling Update of the deployment image
 $ kubectl set image deployment/&lt;deployment name&gt; &lt;containername&gt;=&lt;new image name&gt;
 
-<span style="color: #008800; font-style: italic"># Restart the deployment</span>
+# Restart the deployment
 $ kubectl rollout restart deployment/&lt;deployment name&gt;
 
-<span style="color: #008800; font-style: italic"># To undo the rollout</span>
+# To undo the rollout
 $ kubectl rollout undo deployment/&lt;deployment name&gt;
 
-<span style="color: #008800; font-style: italic"># To know the rollout history of a deployment</span>
+# To know the rollout history of a deployment
 $ kubectl rollout history deployment &lt;deployment name&gt;
 
-<span style="color: #008800; font-style: italic"># To view the logs</span>
+# To view the logs
 $ kubectl logs &lt;podname&gt; --namespace=&lt;namespace name&gt;
 
-<span style="color: #008800; font-style: italic"># To open the interactive shell to the pod</span>
+# To open the interactive shell to the pod
 $ kubectl exec -it &lt;pod name&gt; --namespace=&lt;namespace name&gt; -- /bin/sh
 
-<span style="color: #008800; font-style: italic"># To check the evens on the pod</span>
+# To check the evens on the pod
 $ kubectl describe pod &lt;pod name&gt; | grep -C 10 Events:
 
-<span style="color: #008800; font-style: italic"># Extract a pod definition yaml file to local file</span>
+# Extract a pod definition yaml file to local file
 $ kubectl get pod &lt;podname&gt; -o yaml &gt; &lt;local pod filename&gt;.yaml
-</pre></td></tr></table></div>
-
+</code></pre>
 Searching or Listing Commands
-
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%"> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic"># List the resources in a sorted order by any of the metadata</span>
+<pre><code class="Bash">
+# List the resources in a sorted order by any of the metadata
 $ kubectl get services --sort-by=.metadata.name
 
-<span style="color: #008800; font-style: italic"># Get the particular fields displayed from the resources</span>
-<span style="color: #008800; font-style: italic"># If it is a list then, use names[*].abc</span>
-$ kkubectl get services -A -o custom-columns=<span style="color: #0000FF">&#39;NAME:metadata.name&#39;</span>
+# Get the particular fields displayed from the resources
+# If it is a list then, use names[*].abc
+$ kubectl get services -A -o custom-columns=NAME:metadata.name;
 
-<span style="color: #008800; font-style: italic"># List the resources with specific label</span>
+# List the resources with specific label
 $ kubectl get pod -l &lt;label name&gt;=&lt;label value&gt;
 $ kubectl get pods --selector &lt;label name&gt;=&lt;label value&gt;
 
-<span style="color: #008800; font-style: italic"># To list all of the resources matching with the label</span>
+# To list all of the resources matching with the label
 $ kubectl get all --selector &lt;lable name&gt;=&lt;label value&gt;
-</pre></td></tr></table></div>
-
+</code></pre>
 
 All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  [here](https://kubernetes.io/docs/home/) 
+
+<div id="disqus_thread"></div>
+<script>
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = "https://www.parochi.xyz/2020/11/18/day-to-day-kubernetes.html";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "20201119"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

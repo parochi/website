@@ -10,22 +10,78 @@ $active-bg-color: darken($brand-color, 10%);
 $navbar-dark-color:         $brand-color;
 $navbar-dark-hover-color:   $brand-color;
 
+.navbar-light .navbar-brand {
+  color: #48BBED !important;
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+  color: #FFFFFF;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #FFFFFF;
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: none!important;
+}
+
+.stretched-link::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  content: "";
+  background-color: rgba(0,0,0,0);
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color: #ccc !important;
+}
+
 .bg-brand-nav{
-    background-color: #48BBED;
+    background-color: #FFFFFF;
+    
+}
+
+.font-read-text-custom {
+  font-size: 1rem !important;
+}
+
+
+.bg-main-subtitle{
+  background-color: #48BBED;
 }
 
 .font-brand-nav{
     font-family: 'Montserrat Alternates', sans-serif;
-    font-size: 2rem !important;
+    font-size: 3rem !important;
+    color: #007bff;
+    display: inline-block;
+    //color: #000000;
 }
 
 .font-brand-menu{
     font-size: 1.5rem !important;
+    color: #007bff;
+    //color: #000000;
 }
 
 .font-read-text{
   font-size: 1.3rem !important;
 }
+
+.font-main-subtitle{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 5rem !important;
+}
+
 
 navbar {
     border-bottom: 1px solid darken($active-bg-color, 20%);
