@@ -11,7 +11,8 @@ related_image: /assets/images/2020-11-19.png
         <div class="mask rgba-white-slight"></div>
     </a>
 </div>
-
+<small class="text-muted">Last updated {{ page.date | date: "%b %-d, %Y"}}</small>
+<br/>
 Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept 
  
 "Do not communicate by sharing memory; instead, share memory by communicating".
@@ -131,6 +132,20 @@ In the above example code, at line number 8 we have created a channel that accep
 For more information, it is always recommended to go through the Effective  [Go concurrency](https://golang.org/doc/effective_go.html#concurrency)  documentation.
  
 Share your constructive comments or suggestions to improve the content. 
+
+<br/>
+<p>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="/2020/11/18/day-to-day-kubernetes.html">Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/2020/12/29/desktop-app-for-mfa.html">Next</a>
+        </li>
+      </ul>
+    </nav>
+</p>
 
 <div id="disqus_thread"></div>
 <script>

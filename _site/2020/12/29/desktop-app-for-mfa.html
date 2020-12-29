@@ -13,26 +13,26 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>Parochi - Use Makefile for your daily development tasks</title>
+  <title>Parochi - Desktop App for 2-Factor Authentication</title>
   <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>Use Makefile for your daily development tasks | Parochi</title>
+<title>Desktop App for 2-Factor Authentication | Parochi</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Use Makefile for your daily development tasks" />
+<meta property="og:title" content="Desktop App for 2-Factor Authentication" />
 <meta name="author" content="Rajesh" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Last updated Nov 17, 2020 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture." />
-<meta property="og:description" content="Last updated Nov 17, 2020 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture." />
-<link rel="canonical" href="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html" />
-<meta property="og:url" content="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html" />
+<meta name="description" content="Last updated Dec 29, 2020 These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password." />
+<meta property="og:description" content="Last updated Dec 29, 2020 These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password." />
+<link rel="canonical" href="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html" />
+<meta property="og:url" content="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html" />
 <meta property="og:site_name" content="Parochi" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-11-17T00:00:00-08:00" />
+<meta property="article:published_time" content="2020-12-29T00:00:00-08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Use Makefile for your daily development tasks" />
+<meta property="twitter:title" content="Desktop App for 2-Factor Authentication" />
 <meta name="twitter:site" content="@rajesh_1432" />
 <meta name="twitter:creator" content="@Rajesh" />
 <script type="application/ld+json">
-{"description":"Last updated Nov 17, 2020 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.","@type":"BlogPosting","url":"http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html","headline":"Use Makefile for your daily development tasks","dateModified":"2020-11-17T00:00:00-08:00","datePublished":"2020-11-17T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html"},"author":{"@type":"Person","name":"Rajesh"},"@context":"https://schema.org"}</script>
+{"description":"Last updated Dec 29, 2020 These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password.","@type":"BlogPosting","url":"http://localhost:4000/2020/12/29/desktop-app-for-mfa.html","headline":"Desktop App for 2-Factor Authentication","dateModified":"2020-12-29T00:00:00-08:00","datePublished":"2020-12-29T00:00:00-08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2020/12/29/desktop-app-for-mfa.html"},"author":{"@type":"Person","name":"Rajesh"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   <link rel="stylesheet" href="/assets/css/main.css">
@@ -75,93 +75,41 @@
   <div class="row">
       <div class="col-12 font-read-text"> 
         <div class="view overlay">
-	<img class="card-img-top" src="/assets/images/2020-11-17.jpg" alt="Card image cap" />
+	<img class="card-img-top" src="/assets/images/head.png" alt="Card image cap" />
     <a href="#!">
         <div class="mask rgba-white-slight"></div>
     </a>
 </div>
-<p><small class="text-muted">Last updated Nov 17, 2020</small>
+<p><small class="text-muted">Last updated Dec 29, 2020</small>
 <br />
-A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.</p>
+These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password.</p>
 
-<p>From my experience, If I can list out a typical list of tasks for a go language-based microservice. Those are</p>
+<p>Most of the online services enforce their users to follow the best existing security practices. But sometimes, these best practices hinder our ease of access. For example, Dropbox / Gmail provides an extra layer of security through their 2-Factor Authentication.</p>
 
-<ol>
-  <li>Clean</li>
-  <li>Format</li>
-  <li>Lint</li>
-  <li>Dependencies</li>
-  <li>Run Unit tests</li>
-  <li>Build</li>
-  <li>Push to Dev Quay</li>
-  <li>Coverage Report</li>
-</ol>
+<p class="text-info">
+How does this 2 Factor authentication works?
+</p>
+<p class="text-secondary">
+2-Factor Authentication requires an extra device owned by the user to generate a random number. Using this random number, the provider will confirm the authentication for their application. But most of the providers like Google Authenticator or Microsoft Authenticator have mobile-only apps. This limitation restricts us from using the MFA to authenticate our services one or other time.
+</p>
 
-<p>All these steps can be placed in a simple Makefile and then onwards, the same can be used by anyone to quickly take the charge and move on. This kind is one of the best practices when it comes to day-to-day development activity [I am not denying that there are multiple ways of achieving the same]. Here is the typical Makefile from my experience.</p>
+<p>But, there is good news that I recently came across an App (Authy) that is available both on Mobile and Desktop (including Linux). Along with that, there are multiple advantages available. Please refer to their site https://support.authy.com/hc/en-us/articles/115001943608-Welcome-to-Authy-</p>
 
-<p>The below sample make file is specific to Go language-based environment but I believe the idea can be used to leverage with any other project.</p>
+<p>Below is the screenshot for the Authy desktop app on my mac. This will help us when our mobile is not around or we lost it. Enjoy the comfort of the rapidly changing technology.</p>
 
-<pre><code class="Makefile">
-# Enable dependencies and configure the private repo
-GO = GO111MODULE=on GOPRIVATE=&lt;your private repo&gt;.cisco.com
-EXEFILE = ./bin/&lt;exe file name&gt;
-MAIN_GO = &lt;your service main.go file location&gt;
-
-# help messages
-help:
-    @echo &#39;Available commands for the &lt;your micro service name&gt;&#39;
-    @echo &#39;Usage&#39;
-    @echo &#39;  all - Run all the available commands&#39;
-    @echo &#39;  clean - Run the clean up&#39;
-    @echo &#39;  setup -  Run the initial setup instructions&#39;
-    @echo &#39;  format - Run code format&#39;
-    @echo &#39;  staticanalysis - Run the static code analysis&#39;
-    @echo &#39;  dependencies - Run the dependencies&#39;
-    @echo &#39;  unittest - Run unit tests&#39;
-    @echo &#39;  localbuild - Build the executable&#39;
-
-# Run all the available commands in the below order
-all: clean setup dependencies format staticanalysis unittest localbuild
-
-clean:
-    @echo &quot;Cleaning the previous executable and coverage reports&quot;
-    rm -f coveragereport.out report.json
-    rm -f ${EXEFILE }
-
-setup:
-    @echo &quot;Add any steps that are needed&quot;
-    &lt;some installation tasks&gt;
-format:
-    @echo &quot;Code Formatting&quot;
-    ${GO} fmt ./...
-staticanalysis:
-    @echo &quot;&quot;
-    golangci-lint run -c .golangci.yaml
-dependencies:
-    @echo &#39; Load Dependencies&#39;
-    ${GO} mod tidy
-    ${GO} mod download
-unittest:
-    @echo &quot;Executing Unit tests&quot;
-    ${GO} test -v covermode=atomic -count=1 ./... -coverprofile coveragereport.out
-    ${GO} test -race test -covermode=atomic -count=1 ./... -json &gt; report.json
-localbuild:
-    @echo &quot;Loca build&quot;
-    ${GO} build -o ${EXEFILE} ${MAIN_GO}
-    docker build -t &lt;your tag name&gt; .
-    docker tag &lt;your tag name&gt; &lt;your quay repo location&gt;:latest
-    docker push &lt;your quay repo location&gt;:latest
-</code></pre>
+<div class="text-center">
+  <img src="/assets/images/2fa.png" class="rounded mx-auto d-block" alt="authy-app-on-mac" />
+</div>
 
 <p><br /></p>
 <p>
-    <nav aria-label="Page navigation">
+    <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
         <li class="page-item">
-          <a class="page-link" href="/2020/11/18/day-to-day-kubernetes.html">Next</a>
+          <a class="page-link" href="/2020/11/19/go-concurrency.html">Previous</a>
+        </li>
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Next</a>
         </li>
       </ul>
     </nav>

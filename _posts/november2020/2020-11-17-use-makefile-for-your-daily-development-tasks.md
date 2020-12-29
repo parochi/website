@@ -10,7 +10,8 @@ related_image: /assets/images/2020-11-17.jpg
         <div class="mask rgba-white-slight"></div>
     </a>
 </div>
-
+<small class="text-muted">Last updated {{ page.date | date: "%b %-d, %Y"}}</small>
+<br/>
 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture. 
 
 From my experience, If I can list out a typical list of tasks for a go language-based microservice. Those are
@@ -79,6 +80,20 @@ localbuild:
     docker tag &lt;your tag name&gt; &lt;your quay repo location&gt;:latest
     docker push &lt;your quay repo location&gt;:latest
 </code></pre>
+
+<br/>
+<p>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/2020/11/18/day-to-day-kubernetes.html">Next</a>
+        </li>
+      </ul>
+    </nav>
+</p>
 
 <div id="disqus_thread"></div>
 <script>
