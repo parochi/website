@@ -1,11 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-12-09T18:40:54-08:00</updated><id>/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Go Concurrency - A typical production use</title><link href="/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>/2020/11/19/go-concurrency</id><content type="html" xml:base="/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-29T13:42:12-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Desktop App for 2-Factor Authentication</title><link href="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html" rel="alternate" type="text/html" title="Desktop App for 2-Factor Authentication" /><published>2020-12-29T00:00:00-08:00</published><updated>2020-12-29T00:00:00-08:00</updated><id>http://localhost:4000/2020/12/29/desktop-app-for-mfa</id><content type="html" xml:base="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html">&lt;div class=&quot;view overlay&quot;&gt;
+	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/head.png&quot; alt=&quot;Card image cap&quot; /&gt;
+    &lt;a href=&quot;#!&quot;&gt;
+        &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
+    &lt;/a&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;small class=&quot;text-muted&quot;&gt;Last updated Dec 29, 2020&lt;/small&gt;
+&lt;br /&gt;
+These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password.&lt;/p&gt;
+
+&lt;p&gt;Most of the online services enforce their users to follow the best existing security practices. But sometimes, these best practices hinder our ease of access. For example, Dropbox / Gmail provides an extra layer of security through their 2-Factor Authentication.&lt;/p&gt;
+
+&lt;p class=&quot;text-info&quot;&gt;
+How does this 2 Factor authentication works?
+&lt;/p&gt;
+&lt;p class=&quot;text-secondary&quot;&gt;
+2-Factor Authentication requires an extra device owned by the user to generate a random number. Using this random number, the provider will confirm the authentication for their application. But most of the providers like Google Authenticator or Microsoft Authenticator have mobile-only apps. This limitation restricts us from using the MFA to authenticate our services one or other time.
+&lt;/p&gt;
+
+&lt;p&gt;But, there is good news that I recently came across an App (Authy) that is available both on Mobile and Desktop (including Linux). Along with that, there are multiple advantages available. Please refer to their site https://support.authy.com/hc/en-us/articles/115001943608-Welcome-to-Authy-&lt;/p&gt;
+
+&lt;p&gt;Below is the screenshot for the Authy desktop app on my mac. This will help us when our mobile is not around or we lost it. Enjoy the comfort of the rapidly changing technology.&lt;/p&gt;
+
+&lt;div class=&quot;text-center&quot;&gt;
+  &lt;img src=&quot;/assets/images/2fa.png&quot; class=&quot;rounded mx-auto d-block&quot; alt=&quot;authy-app-on-mac&quot; /&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;nav aria-label=&quot;Page navigation example&quot;&gt;
+      &lt;ul class=&quot;pagination justify-content-center&quot;&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/11/19/go-concurrency.html&quot;&gt;Previous&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;page-item disabled&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;#&quot; tabindex=&quot;-1&quot;&gt;Next&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/p&gt;
+
+&lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+   /*
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
+    */
+    var disqus_config = function () {
+    this.page.url = &quot;https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = &quot;20201117&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://parochi-xyz.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+&lt;/script&gt;
+
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html">Last updated Dec 29, 2020 These days online security became a very challenging task. It is always a better idea to add an extra layer of security to our online accounts whenever it is possible. This will prevent others from accessing our accounts though they have got our password.</summary></entry><entry><title type="html">Go Concurrency - A typical production use</title><link href="http://localhost:4000/2020/11/19/go-concurrency.html" rel="alternate" type="text/html" title="Go Concurrency - A typical production use" /><published>2020-11-19T00:00:00-08:00</published><updated>2020-11-19T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/19/go-concurrency</id><content type="html" xml:base="http://localhost:4000/2020/11/19/go-concurrency.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-19.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-
-&lt;p&gt;Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept&lt;/p&gt;
+&lt;p&gt;&lt;small class=&quot;text-muted&quot;&gt;Last updated Nov 19, 2020&lt;/small&gt;
+&lt;br /&gt;
+Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept&lt;/p&gt;
 
 &lt;p&gt;“Do not communicate by sharing memory; instead, share memory by communicating”.&lt;/p&gt;
 
@@ -124,6 +185,20 @@ func printFullName(fn FullName) {
 
 &lt;p&gt;Share your constructive comments or suggestions to improve the content.&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;nav aria-label=&quot;Page navigation example&quot;&gt;
+      &lt;ul class=&quot;pagination justify-content-center&quot;&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/11/18/day-to-day-kubernetes.html&quot;&gt;Previous&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/12/29/desktop-app-for-mfa.html&quot;&gt;Next&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/p&gt;
+
 &lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
    /*
@@ -143,14 +218,15 @@ func printFullName(fn FullName) {
     })();
 &lt;/script&gt;
 
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html">Last updated Nov 19, 2020 Go handles concurrency in a slightly different way than the other programming languages. The effective Go has a slogan around their new concept “Do not communicate by sharing memory; instead, share memory by communicating”. These Go routines are unique and they are not operating system threads. It is a function executing concurrently with other goroutines in the same address space. It is lightweight, costing little more than the allocation of stack space. More you can read at the official documentation site here</summary></entry><entry><title type="html">Day to Day Kubernetes Commandline Reference</title><link href="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html" rel="alternate" type="text/html" title="Day to Day Kubernetes Commandline Reference" /><published>2020-11-18T00:00:00-08:00</published><updated>2020-11-18T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/18/day-to-day-kubernetes</id><content type="html" xml:base="http://localhost:4000/2020/11/18/day-to-day-kubernetes.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-18.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-
-&lt;p&gt;There are multiple resources for the Kubernetes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl&lt;/code&gt; command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.&lt;/p&gt;
+&lt;p&gt;&lt;small class=&quot;text-muted&quot;&gt;Last updated Nov 18, 2020&lt;/small&gt;
+&lt;br /&gt;
+There are multiple resources for the Kubernetes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;kubectl&lt;/code&gt; command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.&lt;/p&gt;
 
 &lt;p&gt;To Get the Context&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;Bash&quot;&gt;
@@ -249,6 +325,20 @@ $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;
 
 &lt;p&gt;All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  &lt;a href=&quot;https://kubernetes.io/docs/home/&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;nav aria-label=&quot;Page navigation example&quot;&gt;
+      &lt;ul class=&quot;pagination justify-content-center&quot;&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/11/17/use-makefile-for-your-daily-development-tasks.html&quot;&gt;Previous&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/11/19/go-concurrency.html&quot;&gt;Next&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/p&gt;
+
 &lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
    /*
@@ -268,14 +358,15 @@ $ kubectl get all --selector &amp;lt;lable name&amp;gt;=&amp;lt;label value&amp;
     })();
 &lt;/script&gt;
 
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html">Last updated Nov 18, 2020 There are multiple resources for the Kubernetes kubectl command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.</summary></entry><entry><title type="html">Use Makefile for your daily development tasks</title><link href="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html" rel="alternate" type="text/html" title="Use Makefile for your daily development tasks" /><published>2020-11-17T00:00:00-08:00</published><updated>2020-11-17T00:00:00-08:00</updated><id>http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks</id><content type="html" xml:base="http://localhost:4000/2020/11/17/use-makefile-for-your-daily-development-tasks.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/2020-11-17.jpg&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-
-&lt;p&gt;A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.&lt;/p&gt;
+&lt;p&gt;&lt;small class=&quot;text-muted&quot;&gt;Last updated Nov 17, 2020&lt;/small&gt;
+&lt;br /&gt;
+A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.&lt;/p&gt;
 
 &lt;p&gt;From my experience, If I can list out a typical list of tasks for a go language-based microservice. Those are&lt;/p&gt;
 
@@ -346,6 +437,20 @@ localbuild:
     docker push &amp;lt;your quay repo location&amp;gt;:latest
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;
+    &lt;nav aria-label=&quot;Page navigation&quot;&gt;
+      &lt;ul class=&quot;pagination justify-content-center&quot;&gt;
+        &lt;li class=&quot;page-item disabled&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;#&quot; tabindex=&quot;-1&quot;&gt;Previous&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class=&quot;page-item&quot;&gt;
+          &lt;a class=&quot;page-link&quot; href=&quot;/2020/11/18/day-to-day-kubernetes.html&quot;&gt;Next&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+&lt;/p&gt;
+
 &lt;div id=&quot;disqus_thread&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
    /*
@@ -365,4 +470,4 @@ localbuild:
     })();
 &lt;/script&gt;
 
-&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html"></summary></entry></feed>
+&lt;noscript&gt;Please enable JavaScript to view the &lt;a href=&quot;https://disqus.com/?ref_noscript&quot;&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;</content><author><name>Rajesh</name></author><summary type="html">Last updated Nov 17, 2020 A typical routine of a developer is code, build, unit test, and deploy. Most of the time, developers do all these tasks in their local first and once everything is fine then they move to the next state. This will be a very much repeated process when we work on a microservices architecture.</summary></entry></feed>

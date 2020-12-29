@@ -10,7 +10,8 @@ related_image: /assets/images/2020-11-18.jpg
         <div class="mask rgba-white-slight"></div>
     </a>
 </div>
-
+<small class="text-muted">Last updated {{ page.date | date: "%b %-d, %Y"}}</small>
+<br/>
 There are multiple resources for the Kubernetes `kubectl` command line reference. It is very good practice to learn the usage of all those commands. But, here I would like to share the most day to day commands that we use on the terminal to take care of our daily development and debugging activities with respect to Kubernetes.
 
 To Get the Context
@@ -109,6 +110,20 @@ $ kubectl get all --selector &lt;lable name&gt;=&lt;label value&gt;
 </code></pre>
 
 All the above command reference is the typical actions we do as a Cloud Developer/Engineer in our day to day activities. But for more references the ocean like documentation available at  [here](https://kubernetes.io/docs/home/) 
+
+<br/>
+<p>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="/2020/11/17/use-makefile-for-your-daily-development-tasks.html" >Previous</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="/2020/11/19/go-concurrency.html">Next</a>
+        </li>
+      </ul>
+    </nav>
+</p>
 
 <div id="disqus_thread"></div>
 <script>
