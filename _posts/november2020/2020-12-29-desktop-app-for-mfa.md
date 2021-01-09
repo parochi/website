@@ -54,8 +54,8 @@ Below is the screenshot for the Authy desktop app on my mac. This will help us w
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
     */
     var disqus_config = function () {
-    this.page.url = "https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html";  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = "20201117"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.url = "https://www.parochi.xyz/2020/12/29/desktop-app-for-mfa.html";  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = "20201229"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE

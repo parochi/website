@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-12-29T13:42:12-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Desktop App for 2-Factor Authentication</title><link href="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html" rel="alternate" type="text/html" title="Desktop App for 2-Factor Authentication" /><published>2020-12-29T00:00:00-08:00</published><updated>2020-12-29T00:00:00-08:00</updated><id>http://localhost:4000/2020/12/29/desktop-app-for-mfa</id><content type="html" xml:base="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html">&lt;div class=&quot;view overlay&quot;&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-01-08T23:22:07-08:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Parochi</title><subtitle>A Developers weekly Saga;</subtitle><author><name>Rajesh</name></author><entry><title type="html">Desktop App for 2-Factor Authentication</title><link href="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html" rel="alternate" type="text/html" title="Desktop App for 2-Factor Authentication" /><published>2020-12-29T00:00:00-08:00</published><updated>2020-12-29T00:00:00-08:00</updated><id>http://localhost:4000/2020/12/29/desktop-app-for-mfa</id><content type="html" xml:base="http://localhost:4000/2020/12/29/desktop-app-for-mfa.html">&lt;div class=&quot;view overlay&quot;&gt;
 	&lt;img class=&quot;card-img-top&quot; src=&quot;/assets/images/head.png&quot; alt=&quot;Card image cap&quot; /&gt;
     &lt;a href=&quot;#!&quot;&gt;
         &lt;div class=&quot;mask rgba-white-slight&quot;&gt;&lt;/div&gt;
@@ -46,8 +46,8 @@ How does this 2 Factor authentication works?
     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    
     */
     var disqus_config = function () {
-    this.page.url = &quot;https://www.parochi.xyz/2020/11/17/use-makefile-for-your-daily-development-tasks.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = &quot;20201117&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    this.page.url = &quot;https://www.parochi.xyz/2020/12/29/desktop-app-for-mfa.html&quot;;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = &quot;20201229&quot;; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     
     (function() { // DON'T EDIT BELOW THIS LINE
